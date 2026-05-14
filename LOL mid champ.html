@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>英雄联盟中路法典 | 全法师/刺客优缺点分析</title>
+    <meta name="description" content="中路英雄大全：法师、刺客、功能型中单全收录。深度剖析每位英雄的优势与劣势，附官方英雄头像，助你制霸峡谷中路。">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 神秘紫金风格 - 与上路（黄黑）、下路（霓虹）区分 */
+        body {
+            background: radial-gradient(circle at 10% 20%, #0f071a, #06030c);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Poppins', 'Roboto', sans-serif;
+            color: #f0eef7;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2a1e3a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #bf7af0;
+            border-radius: 10px;
+        }
+
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(191, 122, 240, 0.15);
+            backdrop-filter: blur(4px);
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #d6a2ff;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(191, 122, 240, 0.4);
+        }
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #c084fc, #a855f7, #7c3aed);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+            text-shadow: 0 0 20px rgba(160, 100, 240, 0.3);
+        }
+        .subhead {
+            font-size: 1.1rem;
+            color: #b9a9d4;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .filter-hint {
+            text-align: center;
+            margin: 2rem 0 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .filter-tag {
+            background: #1e1530;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #cfb5ff;
+            border: 1px solid #3a2c55;
+        }
+
+        .champions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0 3rem;
+        }
+
+        .champion-card {
+            background: linear-gradient(145deg, #15102a, #0d0a1c);
+            border-radius: 2rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #2f234b;
+            box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.6);
+        }
+        .champion-card:hover {
+            transform: translateY(-6px);
+            border-color: #b77cf0;
+            box-shadow: 0 20px 32px -12px rgba(160, 100, 240, 0.25);
+        }
+
+        .card-header {
+            padding: 1.2rem 1.5rem 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px solid #231c36;
+        }
+        .avatar-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 60px;
+            object-fit: cover;
+            background: linear-gradient(145deg, #a855f7, #7c3aed);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(168, 85, 247, 0.6);
+            transition: transform 0.2s ease;
+        }
+        .avatar-img:hover {
+            transform: scale(1.05);
+        }
+        .champion-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #e9d5ff, #c084fc);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .champion-title {
+            font-size: 0.65rem;
+            color: #9b86b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-body {
+            padding: 1.2rem 1.5rem 1.5rem;
+        }
+        .pros, .cons {
+            margin-bottom: 1.2rem;
+        }
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 0.6rem;
+        }
+        .pros .section-label {
+            color: #4ade80;
+        }
+        .cons .section-label {
+            color: #f97316;
+        }
+        .pros-list, .cons-list {
+            list-style: none;
+            padding-left: 0.25rem;
+        }
+        .pros-list li, .cons-list li {
+            font-size: 0.82rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            line-height: 1.4;
+            color: #e2d6f0;
+        }
+        .pros-list li::before {
+            content: "✦";
+            color: #4ade80;
+            font-weight: bold;
+        }
+        .cons-list li::before {
+            content: "✧";
+            color: #f97316;
+            font-weight: bold;
+        }
+        .role-tag {
+            display: inline-block;
+            background: #1e1530;
+            border-radius: 20px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.65rem;
+            font-weight: 500;
+            margin-top: 0.75rem;
+            color: #d6b0ff;
+            border-left: 2px solid #a855f7;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #26203d;
+            font-size: 0.75rem;
+            color: #7a6b98;
+        }
+
+        @media (max-width: 750px) {
+            body { padding: 1rem; }
+            h1 { font-size: 2rem; }
+            .champions-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+            .champion-name { font-size: 1.3rem; }
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .champion-card {
+            animation: fadeSlideUp 0.45s ease backwards;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <div class="hero-badge">🔮 峡谷魔法殿堂 · 中路封神录 🔮</div>
+        <h1>中路英雄图鉴 (含官方头像)</h1>
+        <div class="subhead">法师 · 刺客 · 功能中单 | 从对线到团战 优缺一目了然</div>
+        <div class="filter-hint">
+            <span class="filter-tag">🔥 爆发法师</span>
+            <span class="filter-tag">🗡️ 刺客</span>
+            <span class="filter-tag">🌀 节奏型</span>
+            <span class="filter-tag">⚙️ 持续输出</span>
+            <span class="filter-tag">🛡️ 功能辅核</span>
+        </div>
+    </div>
+
+    <div class="champions-grid">
+        <!-- 1. 亚索 -->
+        <div class="champion-card">
+            <div class="card-header">
+                <img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Yasuo.png" alt="亚索">
+                <div><div class="champion-name">亚索</div><div class="champion-title">疾风剑豪</div></div>
+            </div>
+            <div class="card-body">
+                <div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>被动双倍暴击，装备成型后伤害爆炸</li><li>风墙克制所有远程飞行技能，对线counter法师</li><li>E技能踏前斩无限位移，操作上限极高</li><li>大招配合击飞打出毁灭连招</li></ul></div>
+                <div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>极度吃熟练度和进场时机</li><li>逆风局作用极小，容易超鬼</li><li>容易被硬控针对</li><li>对线前期较弱，需要队友击飞配合</li></ul></div>
+                <div class="role-tag">🗡️ 剑客/暴击刺客</div>
+            </div>
+        </div>
+        <!-- 2. 劫 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Zed.png" alt="劫"><div><div class="champion-name">劫</div><div class="champion-title">影流之主</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>影子换位灵活，超高单体爆发</li><li>大招无法选取，击杀后二次位移</li><li>线上无蓝条，消耗能力强</li><li>滚雪球能力顶级，单带单杀无敌</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>后期伤害疲软，打坦能力极差</li><li>极度依赖技能命中率和能量管理</li><li>团战需要极高操作才能切死后排</li><li>被中娅沙漏完美克制</li></ul></div><div class="role-tag">🗡️ 物理刺客</div></div>
+        </div>
+        <!-- 3. 阿狸 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Ahri.png" alt="阿狸"><div><div class="champion-name">阿狸</div><div class="champion-title">九尾妖狐</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>三段大招位移，自保和追击极强</li><li>E魅惑开团神技，配合打野稳定击杀</li><li>被动回血续航，赖线能力强</li><li>技能加速，拉扯风筝能力优秀</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>单体伤害偏低，打前排刮痧</li><li>非常依赖E技能命中率</li><li>后期团战输出不足</li></ul></div><div class="role-tag">🦊 法刺/拉扯法师</div></div>
+        </div>
+        <!-- 4. 勒布朗 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Leblanc.png" alt="勒布朗"><div><div class="champion-name">勒布朗</div><div class="champion-title">诡术妖姬</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>双段位移，机动性最强刺客之一</li><li>W往返无伤消耗，线上压制力极强</li><li>前期爆发最高，单杀能力T0</li><li>配合打野游走节奏无敌</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>清线能力差，后期超级兵</li><li>逆风局完全隐身，毫无作用</li><li>打坦能力几乎为零</li><li>操作难度极高，容错率极低</li></ul></div><div class="role-tag">🎭 法刺/节奏大师</div></div>
+        </div>
+        <!-- 5. 佐伊 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Zoe.png" alt="佐伊"><div><div class="champion-name">佐伊</div><div class="champion-title">暮光星灵</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>超远距离poke，E技能睡到必杀</li><li>捡闪现灵光，团战可以多次位移</li><li>爆发伤害极高，一件套成型就有统治力</li><li>技能机制独特，上限极高</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>极度依赖E技能命中率，空E即废</li><li>清线慢，推不动兵线</li><li>身板脆，被贴脸无反抗能力</li><li>后期团战作用不稳定</li></ul></div><div class="role-tag">✨ 爆发法师/poke</div></div>
+        </div>
+        <!-- 6. 辛德拉 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Syndra.png" alt="辛德拉"><div><div class="champion-name">辛德拉</div><div class="champion-title">暗黑元首</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>Q技能短CD持续消耗，线上压制力强</li><li>E技能推球群体眩晕，团战控制足</li><li>大招斩杀机制，满球单点秒杀脆皮</li><li>后期伤害依旧爆炸</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>无位移，极其害怕刺客突脸</li><li>技能全非指向性，命中率要求高</li><li>前期缺蓝，需要控蓝</li></ul></div><div class="role-tag">⚡ 传统法师/爆发</div></div>
+        </div>
+        <!-- 7. 卡萨丁 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Kassadin.png" alt="卡萨丁"><div><div class="champion-name">卡萨丁</div><div class="champion-title">虚空行者</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>16级神级大招，R闪切入无敌</li><li>被动+Q魔法护盾克制法师</li><li>后期最强法刺之一，团战收割机器</li><li>单带牵制能力极强</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>前期极其弱势，对线被所有英雄压制</li><li>发育周期太长，装备成型前无作用</li><li>极度怕物理刺客</li></ul></div><div class="role-tag">🌌 后期法核/虚空</div></div>
+        </div>
+        <!-- 8. 艾克 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Ekko.png" alt="艾克"><div><div class="champion-name">艾克</div><div class="champion-title">时间刺客</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>大招时光倒流，容错率极高</li><li>EQ三环爆发，推线快游走强</li><li>W时空断裂群体眩晕，团战控制足</li><li>灵活拉扯，单挑能力强</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>前期伤害偏低，需要装备支撑</li><li>打前排能力弱，逆风局刮痧</li><li>大招一旦使用失误，极易暴毙</li></ul></div><div class="role-tag">⏳ 法刺/时间掌控</div></div>
+        </div>
+        <!-- 9. 奥莉安娜 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Orianna.png" alt="奥莉安娜"><div><div class="champion-name">奥莉安娜</div><div class="champion-title">发条魔灵</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>QWE技能全面，万金油法师</li><li>大招冲击波团战神技，逆转战局</li><li>护盾+加速，自保和拉扯优秀</li><li>后期APCarry，持续输出稳定</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>没有位移，容易被针对</li><li>球的位置需要极高熟练度</li><li>前期缺伤害，对线压制力一般</li></ul></div><div class="role-tag">⚙️ 传统法师/团战女王</div></div>
+        </div>
+        <!-- 10. 泽拉斯 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Xerath.png" alt="泽拉斯"><div><div class="champion-name">泽拉斯</div><div class="champion-title">远古巫灵</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>超远程炮台，无伤消耗</li><li>大招三连发，全图支援清线</li><li>被动回蓝，线上无限消耗</li><li>阵地战输出环境好</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>零位移，被突脸必死</li><li>技能全非指向，命中率要求极高</li><li>近身作战能力为零</li></ul></div><div class="role-tag">🎯 远程炮台/poke</div></div>
+        </div>
+        <!-- 11. 黛安娜 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Diana.png" alt="黛安娜"><div><div class="champion-name">黛安娜</div><div class="champion-title">月女</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>QR突进，爆发极高</li><li>W护盾+吸伤害，对拼很强</li><li>E技能两次突进，收割能力强</li><li>推线快，游走支援猛</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>进场有去无回，容易暴毙</li><li>后期打坦能力一般</li><li>依赖大招命中率</li></ul></div><div class="role-tag">🌙 战士法刺</div></div>
+        </div>
+        <!-- 12. 崔斯特 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/TwistedFate.png" alt="崔斯特"><div><div class="champion-name">崔斯特</div><div class="champion-title">卡牌大师</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>大招半图传送，带节奏最强中单</li><li>W黄牌稳定点控，配合打野必杀</li><li>被动额外经济，装备成型快</li><li>推线快，游走支援无敌</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>对线弱，单杀能力差</li><li>没有位移，被抓极易死</li><li>后期输出疲软</li></ul></div><div class="role-tag">🎴 节奏大师/全球流</div></div>
+        </div>
+        <!-- 13. 塞拉斯 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Sylas.png" alt="塞拉斯"><div><div class="champion-name">塞拉斯</div><div class="champion-title">解脱者</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>偷大招机制，上限极高</li><li>QWE连招爆发高，回血强</li><li>多段位移灵活，小规模团战强</li><li>克制依赖大招的英雄</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>前期CD长，对线弱</li><li>后期打坦能力一般</li><li>极度吃玩家英雄池</li></ul></div><div class="role-tag">🔗 法刺/大招窃取</div></div>
+        </div>
+        <!-- 14. 拉克丝 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Lux.png" alt="拉克丝"><div><div class="champion-name">拉克丝</div><div class="champion-title">光辉女郎</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>超远距离Q禁锢，ER全图大炮</li><li>W双护盾，保护队友能力强</li><li>后期大招CD短，poke清兵强</li><li>技能范围大，团战安全输出</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>极度脆皮，无位移</li><li>技能全预判，命中率低则没用</li><li>近身被秒，毫无反制</li></ul></div><div class="role-tag">✨ 炮台法师</div></div>
+        </div>
+        <!-- 15. 加里奥 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Galio.png" alt="加里奥"><div><div class="champion-name">加里奥</div><div class="champion-title">正义巨像</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>半图大招，保护队友强开团</li><li>被动+Q清线极快，游走支援</li><li>W魔法护盾+嘲讽，克制法师</li><li>坦度高，团战前排</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>伤害偏低，难单杀</li><li>笨重，容易被风筝</li><li>大招需要队友配合</li></ul></div><div class="role-tag">🛡️ 法坦/全球流</div></div>
+        </div>
+        <!-- 16. 永恩 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Yone.png" alt="永恩"><div><div class="champion-name">永恩</div><div class="champion-title">封魔剑魂</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>双剑机制，爆发混合伤害</li><li>E灵魂脱壳，无风险消耗</li><li>大招群控，团战收割强</li><li>后期单带和团战都强</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>前期弱势，线上容易被压</li><li>身板脆，进场时机要求高</li><li>逆风局作用小</li></ul></div><div class="role-tag">🗡️ 双剑战士</div></div>
+        </div>
+        <!-- 17. 冰晶凤凰 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Anivia.png" alt="艾尼维亚"><div><div class="champion-name">艾尼维亚</div><div class="champion-title">冰晶凤凰</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>被动蛋形态，自带复活甲</li><li>Q眩晕+E双倍伤害爆发高</li><li>W冰墙分割地形，操作上限高</li><li>后期清线守塔无敌</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>前期缺蓝，推线慢</li><li>极度笨重，无位移</li><li>技能弹道慢，预判要求高</li></ul></div><div class="role-tag">❄️ 阵地法师</div></div>
+        </div>
+        <!-- 18. 弗拉基米尔 (吸血鬼) -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Vladimir.png" alt="弗拉基米尔"><div><div class="champion-name">弗拉基米尔</div><div class="champion-title">猩红收割者</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>被动血量法强互转，后期极肉极高输出</li><li>血池无法选取，自保无敌</li><li>Q吸血续航，赖线极强</li><li>大招范围增伤，团战核弹</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>前期弱，需要发育到两件套</li><li>手短，容易被长手消耗</li><li>逆风局难发挥作用</li></ul></div><div class="role-tag">🩸 法坦/后期核</div></div>
+        </div>
+        <!-- 19. 瑞兹 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Ryze.png" alt="瑞兹"><div><div class="champion-name">瑞兹</div><div class="champion-title">符文法师</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>EQ连招法术机关枪，持续输出高</li><li>大招群体传送，战略节奏神技</li><li>后期大核，输出爆炸</li><li>清线支援快</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>手短，需要贴脸输出</li><li>前期缺蓝，非常吃装备</li><li>大招需要队友配合，路人局难发挥</li></ul></div><div class="role-tag">📜 法术机关枪</div></div>
+        </div>
+        <!-- 20. 维克托 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Viktor.png" alt="维克托"><div><div class="champion-name">维克托</div><div class="champion-title">机械先驱</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>海克斯核心进化，后期全能法师</li><li>E死亡射线清线消耗极强</li><li>W重力场控制，团战限制走位</li><li>大招沉默+持续伤害</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>前期弱，进化需要经济</li><li>无位移，容易被刺客秒</li><li>技能需要预判</li></ul></div><div class="role-tag">⚙️ 后期法核</div></div>
+        </div>
+        <!-- 21. 安妮 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Annie.png" alt="安妮"><div><div class="champion-name">安妮</div><div class="champion-title">黑暗之女</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>被动晕眩，QW稳定点控</li><li>大招提伯斯群体伤害+持续作战</li><li>Q补刀回蓝，对线消耗强</li><li>爆发极高，一套秒脆皮</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>手短，技能范围近</li><li>无位移，容易被抓</li><li>后期作用单一</li></ul></div><div class="role-tag">🧸 爆发法师</div></div>
+        </div>
+        <!-- 22. 马尔扎哈 -->
+        <div class="champion-card">
+            <div class="card-header"><img class="avatar-img" src="https://game.gtimg.cn/images/lol/act/img/champion/Malzahar.png" alt="马尔扎哈"><div><div class="champion-name">马尔扎哈</div><div class="champion-title">虚空先知</div></div></div>
+            <div class="card-body"><div class="pros"><div class="section-label">✓ 优势</div><ul class="pros-list"><li>被动护盾免控，生存能力强</li><li>E技能传染清线，推线无解</li><li>大招压制稳定点控，配合打野必杀</li><li>后期输出稳定，打坦能力强</li></ul></div><div class="cons"><div class="section-label">✗ 劣势</div><ul class="cons-list"><li>伤害需要时间，爆发不足</li><li>无位移，被抓交闪必死</li><li>大招容易被水银解掉</li></ul></div><div class="role-tag">🦠 持续法师/压制</div></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>
